@@ -4,8 +4,8 @@ import './App.css';
 import Tabela from './Tabela';
 
 class App extends Component {
-  
-    autores =  [
+  state = {
+    autores: [
       {
         nome: 'Paulo',
         livro: 'React',
@@ -25,14 +25,23 @@ class App extends Component {
         nome: 'Bruno',
         livro: 'DevOps',
         preco: '100'
-      }
-    ];
+      }        
+    ]
+}
 
+  removeAutor = index => {
+    const { autores } = this.state;
+
+    this.setState({
+        autores : autores.filter((autor, posAtual) => {
+            return posAtual !== index;
+        }),
+    });
+  }
 
   render() {
     return (
-      <Tabela autores={this.autores}/>  
-    );
+<Tabela autores= {this.state.autores} removeAutor= {this.removeAutor} />    );
   }
 }
 
